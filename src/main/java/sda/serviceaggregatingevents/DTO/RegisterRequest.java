@@ -7,8 +7,7 @@ import lombok.*;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class RegisterRequest
-{
+public class RegisterRequest {
     @NotEmpty
     private String Name;
 

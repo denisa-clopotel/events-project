@@ -10,6 +10,7 @@ import java.util.List;
 
 public interface CommentService {
     void addComment(CommentRequest request);
+
     List<CommentResponse> getCommentsForEvent(Long eventId);
 }
 

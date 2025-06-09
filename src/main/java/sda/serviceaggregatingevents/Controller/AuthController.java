@@ -36,11 +36,9 @@ public class AuthController {
     private final AuthenticationManager authenticationManager;
 
     @PostMapping("/register")
-    public ResponseEntity<Void> registerUser(@RequestBody RegisterRequest registerRequest)
-    {
+    public ResponseEntity<Void> registerUser(@RequestBody RegisterRequest registerRequest) {
         User existing = userService.findByEmail(registerRequest.getEmail());
-        if (existing != null)
-        {
+        if (existing != null) {
             throw new UserAlreadyTakenException("Email is already in use");
         }
         userService.saveUser(registerRequest);
@@ -48,16 +46,15 @@ public class AuthController {
     }
 
     @PostMapping("/admin-register")
-    public ResponseEntity<Void> registerAdmin(@RequestBody RegisterRequest registerRequest)
-    {
+    public ResponseEntity<Void> registerAdmin(@RequestBody RegisterRequest registerRequest) {
         User existing = userService.findByEmail(registerRequest.getEmail());
-        if (existing != null)
-        {
+        if (existing != null) {
             throw new UserAlreadyTakenException("Email is already in use");
         }
         userService.saveAdmin(registerRequest);
         return ResponseEntity.status(HttpStatus.ACCEPTED).build();
     }
+
     @PostMapping("/signin")
     public ResponseEntity<LoginResponse> authenticateUser(@Valid @RequestBody LoginRequest loginRequest) {
 

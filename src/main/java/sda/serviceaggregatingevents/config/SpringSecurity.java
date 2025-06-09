@@ -17,6 +17,7 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+
 public class SpringSecurity {
 
     private final UserDetailsService userDetailsService;
@@ -39,14 +40,15 @@ public class SpringSecurity {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable();
+        http.csrf(csrf -> csrf.disable());
         http
+                //.authorizeHttpRequests(auth -> auth.anyRequest().permitAll());
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/auth-api/**","/api/**").permitAll()
                         .requestMatchers(HttpMethod.DELETE,"/user-api/**").hasRole("ADMIN")
                         .anyRequest().authenticated()
-                )
-                .httpBasic();
+              );
+        http.httpBasic(httpBasic -> {});
         return http.build();
     }
 

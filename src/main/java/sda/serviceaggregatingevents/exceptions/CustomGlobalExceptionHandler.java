@@ -24,19 +24,17 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     }
 
     @ExceptionHandler(InvalidFormatException.class)
-    public ResponseEntity<Object> handleHttpRequestMethodNotSupported(InvalidFormatException exception, HttpServletRequest httpServletRequest)
-    {
+    public ResponseEntity<Object> handleHttpRequestMethodNotSupported(InvalidFormatException exception, HttpServletRequest httpServletRequest) {
         ApiError apiError = new ApiError();
         apiError.setStatus(HttpStatus.METHOD_NOT_ALLOWED);
         apiError.setMessage(exception.getMessage());
         apiError.setDebugMessage((ExceptionUtils.getRootCauseMessage(exception)));
-        apiError.setPath(((ServletWebRequest)httpServletRequest).getRequest().getRequestURI());
+        apiError.setPath(((ServletWebRequest) httpServletRequest).getRequest().getRequestURI());
         return buildResponseEntity(apiError);
     }
 
     @ExceptionHandler(UserNotFoundException.class)
-    public ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException exception, HttpServletRequest httpServletRequest)
-    {
+    public ResponseEntity<Object> handleUserNotFoundException(UserNotFoundException exception, HttpServletRequest httpServletRequest) {
         ApiError apiError = new ApiError();
         apiError.setStatus(HttpStatus.NOT_FOUND);
         apiError.setMessage(exception.getMessage());
@@ -46,8 +44,7 @@ public class CustomGlobalExceptionHandler extends ResponseEntityExceptionHandler
     }
 
     @ExceptionHandler(UserAlreadyTakenException.class)
-    public ResponseEntity<Object> handleUserAlreadyTakenException(UserAlreadyTakenException exception,HttpServletRequest httpServletRequest)
-    {
+    public ResponseEntity<Object> handleUserAlreadyTakenException(UserAlreadyTakenException exception, HttpServletRequest httpServletRequest) {
         ApiError apiError = new ApiError();
         apiError.setStatus(HttpStatus.IM_USED);
         apiError.setMessage(exception.getMessage());

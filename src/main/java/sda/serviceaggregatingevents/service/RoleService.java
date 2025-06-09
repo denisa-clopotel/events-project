@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface RoleService {
     void createRole(RoleRequest request);
+
     List<RoleResponse> getAllRoles();
 }
 
